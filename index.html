@@ -42,18 +42,15 @@
       transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    /* Negative z-index keeps canvases behind normal-flow content without
-       creating a stacking context on .page — this lets children apply
-       mix-blend-mode directly against the canvas backdrop. */
-    #canvas-a { z-index: -2; opacity: 1; }
-    #canvas-b { z-index: -1; opacity: 0; }
+    #canvas-a { z-index: 1; opacity: 1; }
+    #canvas-b { z-index: 2; opacity: 0; }
 
     /* ─── Page wrapper ─────────────────────────────────────── */
 
     .page {
       position: relative;
-      /* No z-index → no stacking context → no compositing-group isolation.
-         mix-blend-mode is now applied to individual text sections below. */
+      z-index: 10;
+      mix-blend-mode: difference;
       color: #fff;
     }
 
@@ -264,32 +261,6 @@
     @media (min-width: 1140px) { .footer { font-size: 14px; } }
     @media (max-width: 1139px) { .footer { font-size: 12px; } }
 
-    /* ─── Per-element blend mode ──────────────────────────────
-       Apply difference blend to text sections only.
-       .dot icon spans are intentionally excluded — they sit in the
-       same DOM position but have no blend mode, so they always render
-       in their true brand colours regardless of what's behind them.   ─────────────────────────────────────────────────────── */
-
-    .header,
-    .col-bio,
-    .contact-intro,
-    .cv,
-    .footer {
-      mix-blend-mode: difference;
-    }
-
-    /* Contact labels + links blend individually so their sibling .dot
-       icons are not pulled into the same compositing group */
-    .contact-label,
-    .contact-item a {
-      mix-blend-mode: difference;
-    }
-
-    /* Email dot blends (it's a plain white circle, needs inversion to be legible).
-       Social dots (.dot--brand) are intentionally excluded — true colours only. */
-    .dot--blend {
-      mix-blend-mode: difference;
-    }
 
     /* ─── Randomize button ─────────────────────────────────── */
 
@@ -376,7 +347,7 @@
             <span class="contact-label">Enquires →</span>
             <div class="contact-items">
               <div class="contact-item">
-                <span class="dot dot--blend">
+                <span class="dot">
                   <svg viewBox="0 0 16 16" fill="white" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="8" cy="8" r="8"/>
                   </svg>
