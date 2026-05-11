@@ -37,13 +37,9 @@
 
     .canvas-layer {
       position: fixed;
-      /* Extend into safe areas (Dynamic Island top + home indicator bottom) */
-      top: calc(0px - env(safe-area-inset-top, 0px));
-      left: calc(0px - env(safe-area-inset-left, 0px));
-      right: calc(0px - env(safe-area-inset-right, 0px));
-      bottom: calc(0px - env(safe-area-inset-bottom, 0px));
-      width: calc(100vw + env(safe-area-inset-left, 0px) + env(safe-area-inset-right, 0px));
-      height: calc(100dvh + env(safe-area-inset-top, 0px) + env(safe-area-inset-bottom, 0px));
+      inset: 0;
+      width: 100vw;
+      height: 100dvh;
       transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
@@ -494,12 +490,12 @@
     // ─── Utilities ────────────────────────────────────────────
 
     function resize() {
-      // Use offsetWidth/Height so the drawing buffer matches the CSS-computed
-      // canvas size, which includes the safe-area-inset extensions.
-      canvases.forEach(c => {
-        c.width  = c.offsetWidth  || window.innerWidth;
-        c.height = c.offsetHeight || window.innerHeight;
-      });
+      // clientWidth/Height reflects the full layout viewport including safe areas
+      // when viewport-fit=cover is active (unlike window.innerHeight which excludes them)
+      const root = document.documentElement;
+      const w = root.clientWidth  || window.innerWidth;
+      const h = root.clientHeight || window.innerHeight;
+      canvases.forEach(c => { c.width = w; c.height = h; });
     }
 
     function hexToRgb(hex) {
