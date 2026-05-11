@@ -38,6 +38,8 @@
     .canvas-layer {
       position: fixed;
       inset: 0;
+      width: 100vw;
+      height: 100dvh;
       transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
@@ -488,10 +490,9 @@
     // ─── Utilities ────────────────────────────────────────────
 
     function resize() {
-      canvases.forEach(c => {
-        c.width  = c.offsetWidth  || window.innerWidth;
-        c.height = c.offsetHeight || window.innerHeight;
-      });
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      canvases.forEach(c => { c.width = w; c.height = h; });
     }
 
     function hexToRgb(hex) {
