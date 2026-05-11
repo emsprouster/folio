@@ -15,18 +15,9 @@
   </script>
 
   <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.typekit.net/bmk7jhz.css">
 
   <style>
-    @font-face {
-      font-family: 'GT Alpina';
-      src: url('fonts/GT-Alpina-Standard-Thin.woff2') format('woff2');
-      font-weight: 250;
-      font-style: normal;
-      font-display: swap;
-    }
 
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -34,8 +25,9 @@
 
     body {
       background: #000;
-      font-family: 'GT Alpina', 'Cormorant', Georgia, serif;
-      font-weight: 250;
+      font-family: 'freight-text-compressed-pro', serif;
+      font-weight: 300;
+      font-style: normal;
       color: #fff;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
@@ -96,6 +88,8 @@
       align-items: flex-start;
       line-height: 1.2;
       width: 100%;
+      font-family: 'freight-text-pro', serif;
+      font-style: italic;
     }
 
     .header-name,
@@ -103,9 +97,8 @@
       flex: 1;
     }
 
-    /* Mobile: button sits in the header row */
     @media (min-width: 1140px) {
-      .header { gap: 40px; font-size: 22px; }
+      .header { gap: 40px; font-size: 24px; }
     }
 
     @media (max-width: 1139px) {
@@ -140,6 +133,7 @@
 
     .col-bio a {
       color: inherit;
+      font-style: italic;
       text-decoration: underline;
       text-decoration-style: wavy;
       text-decoration-thickness: 5%;
@@ -147,7 +141,7 @@
       text-decoration-skip-ink: none;
     }
 
-    @media (min-width: 1140px) { .col-bio { font-size: 22px; } }
+    @media (min-width: 1140px) { .col-bio { font-size: 24px; } }
     @media (max-width: 1139px) { .col-bio { font-size: 18px; } }
 
     /* ─── Contact column ───────────────────────────────────── */
@@ -162,7 +156,7 @@
       line-height: 1.2;
     }
 
-    @media (min-width: 1140px) { .contact-intro { font-size: 22px; } }
+    @media (min-width: 1140px) { .contact-intro { font-size: 24px; } }
     @media (max-width: 1139px) { .contact-intro { font-size: 18px; } }
 
     /* ─── Contact rows (Enquiries / Socials) ───────────────── */
@@ -181,14 +175,19 @@
 
     /* Desktop: label beside items */
     @media (min-width: 1140px) {
-      .contact-row { gap: 40px; font-size: 22px; }
+      .contact-row { gap: 40px; font-size: 24px; }
       .contact-label { width: 167px; flex-shrink: 0; }
     }
 
-    /* Mobile: label stacked above items */
+    /* Mobile: label stacked above items, drops to caption style */
     @media (max-width: 1139px) {
       .contact-row { flex-direction: column; gap: 20px; font-size: 18px; }
-      .contact-label { width: auto; }
+      .contact-label {
+        width: auto;
+        font-family: 'freight-text-pro', serif;
+        font-style: italic;
+        font-size: 12px;
+      }
     }
 
     .contact-items {
@@ -206,6 +205,7 @@
 
     .contact-item a {
       color: inherit;
+      font-style: italic;
       text-decoration: underline;
       text-decoration-style: wavy;
       text-decoration-thickness: 5%;
@@ -243,13 +243,15 @@
 
     .caption {
       line-height: 1.2;
+      font-family: 'freight-text-pro', serif;
+      font-style: italic;
     }
 
     .cv-body { line-height: 1.2; }
 
     @media (min-width: 1140px) {
       .caption { font-size: 14px; }
-      .cv-body { font-size: 22px; }
+      .cv-body { font-size: 24px; }
     }
 
     @media (max-width: 1139px) {
@@ -260,15 +262,27 @@
     /* ─── Footer ───────────────────────────────────────────── */
 
     .footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      font-family: 'freight-text-pro', serif;
+      font-style: italic;
+      font-size: 14px;
       line-height: 1.2;
       width: 100%;
     }
 
-    @media (min-width: 1140px) { .footer { font-size: 14px; } }
-    @media (max-width: 1139px) { .footer { font-size: 12px; } }
+    @media (min-width: 1140px) {
+      .footer { display: flex; align-items: center; gap: 40px; }
+    }
+
+    @media (max-width: 1139px) {
+      .footer { display: flex; flex-direction: column; gap: 20px; }
+    }
+
+    .footer-ack a {
+      color: inherit;
+      text-decoration: underline;
+      text-decoration-style: solid;
+      text-underline-offset: 20%;
+    }
 
 
     /* ─── Randomize button ─────────────────────────────────── */
@@ -297,11 +311,13 @@
     /* Mobile button (in header) — hidden on desktop */
     @media (min-width: 1140px) { .btn-rand--mobile { display: none; } }
 
-    /* "Randomise?" label + icon group — desktop footer only */
+    /* "Randomise?" label + icon group — desktop footer only.
+       margin-left: auto pushes it to the right edge within the footer flex row. */
     .rand-group {
       display: flex;
       align-items: center;
       gap: 40px;
+      margin-left: auto;
     }
 
     @media (max-width: 1139px) { .rand-group--desktop { display: none; } }
@@ -424,6 +440,7 @@
     <!-- Footer -->
     <footer class="footer">
       <span>Emma Sprouster © 2026</span>
+      <span class="footer-ack">You're reading this in <a href="https://www.dardenstudio.com/" target="_blank">Freight by Joshua Darden</a></span>
       <!-- Randomize — desktop only (bottom-right) -->
       <div class="rand-group rand-group--desktop">
         <span class="rand-label">Randomise?</span>
