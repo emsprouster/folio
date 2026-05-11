@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Emma Sprouster</title>
 
   <!-- Google Analytics GA4 -->
@@ -38,8 +38,6 @@
     .canvas-layer {
       position: fixed;
       inset: 0;
-      width: 100vw;
-      height: 100vh;
       transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
@@ -490,8 +488,10 @@
     // ─── Utilities ────────────────────────────────────────────
 
     function resize() {
-      const w = window.innerWidth, h = window.innerHeight;
-      canvases.forEach(c => { c.width = w; c.height = h; });
+      canvases.forEach(c => {
+        c.width  = c.offsetWidth  || window.innerWidth;
+        c.height = c.offsetHeight || window.innerHeight;
+      });
     }
 
     function hexToRgb(hex) {
