@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>CV — Emma Sprouster</title>
+
+  <!-- Google Analytics GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-FS9S55ZXLW"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-FS9S55ZXLW');
+  </script>
+
+  <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+  <link rel="stylesheet" href="https://use.typekit.net/bmk7jhz.css">
+
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { height: 100%; }
+
+    body {
+      background: #050911;
+      font-family: 'freight-text-pro', serif;
+      font-weight: 300;
+      font-style: italic;
+      color: #FAF6EE;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ─── Header ───────────────────────────────────────────── */
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      display: flex;
+      gap: 40px;
+      align-items: flex-start;
+      padding: 40px;
+      background: #050911;
+    }
+
+    .header-name {
+      flex: 1;
+      font-size: 70px;
+      line-height: 1.2;
+    }
+
+    .header-right {
+      flex: 1;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .header-meta {
+      flex: 1;
+      font-size: 24px;
+      line-height: 1.2;
+    }
+
+    .header-links {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-self: stretch;
+      font-size: 24px;
+      line-height: 1.2;
+    }
+
+    .header-links a,
+    .header-links button {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: inherit;
+      font: inherit;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      text-align: left;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: opacity 0.2s;
+    }
+
+    .header-links .link-arrow {
+      font-style: normal;
+      display: inline-block;
+      width: 24px;
+      flex-shrink: 0;
+    }
+
+    .header-links .link-label {
+      text-decoration: underline;
+      text-decoration-style: wavy;
+      text-decoration-thickness: 5%;
+      text-underline-offset: 20%;
+      text-decoration-skip-ink: none;
+    }
+
+    .header-links a:hover,
+    .header-links button:hover { opacity: 0.55; }
+    .header-links a:active,
+    .header-links button:active { opacity: 0.3; }
+
+    /* ─── CV content ───────────────────────────────────────── */
+
+    .cv-content {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding: 0 200px 40px;
+      margin-top: 120px;
+    }
+
+    .cv-page {
+      aspect-ratio: 210 / 297;
+      width: 100%;
+      background: #d9d9d9;
+    }
+
+    /* the embed fills the single page container */
+    .cv-embed {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* ─── Responsive ───────────────────────────────────────── */
+
+    @media (max-width: 1139px) {
+      .header-name { font-size: 40px; }
+      .header-meta,
+      .header-links { font-size: 18px; }
+      .cv-content { padding: 0 40px 40px; margin-top: 80px; }
+    }
+
+    @media (max-width: 767px) {
+      .header { flex-direction: column; gap: 20px; padding: 20px; }
+      .header-name { font-size: 32px; }
+      .header-right { flex-direction: column; align-items: flex-start; gap: 20px; }
+      .header-links { flex-direction: row; justify-content: flex-start; gap: 20px; align-self: auto; }
+      .cv-content { padding: 0 20px 20px; margin-top: 40px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky header -->
+  <header class="header">
+    <div class="header-name">Emma Sprouster</div>
+    <div class="header-right">
+      <div class="header-meta">
+        Design Director<br>BNE, QLD, AUS
+      </div>
+      <nav class="header-links">
+        <a href="emma-sprouster-cv.pdf" download="Emma-Sprouster-CV.pdf" id="cv-download">
+          <span class="link-arrow" aria-hidden="true">↓</span>
+          <span class="link-label">Download CV</span>
+        </a>
+        <a href="https://emmasprouster.com">
+          <span class="link-arrow" aria-hidden="true">←</span>
+          <span class="link-label">Return to Index</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- PDF pages -->
+  <main class="cv-content" id="cv-content">
+    <div class="cv-page" id="cv-page-1"></div>
+    <div class="cv-page"></div>
+    <div class="cv-page"></div>
+  </main>
+
+  <script>
+    // Embed the PDF in the first page container, spanning all three pages
+    (function () {
+      const content = document.getElementById('cv-content');
+      const page1   = document.getElementById('cv-page-1');
+
+      function embedPdf() {
+        // Remove placeholder pages and replace with a single tall embed
+        const pages = content.querySelectorAll('.cv-page');
+        const totalGap = (pages.length - 1) * 20;
+
+        // Measure available width
+        const w = content.getBoundingClientRect().width;
+        const pageH = w * (297 / 210);
+        const totalH = pageH * pages.length + totalGap;
+
+        // Clear placeholders
+        pages.forEach(p => p.remove());
+
+        // Insert single embed
+        const embed = document.createElement('object');
+        embed.data = 'emma-sprouster-cv.pdf';
+        embed.type = 'application/pdf';
+        embed.className = 'cv-embed';
+        embed.style.height = totalH + 'px';
+        embed.innerHTML = '<p style="padding:40px;color:#FAF6EE">PDF cannot be displayed in this browser. <a href="emma-sprouster-cv.pdf" download style="color:inherit">Download CV instead.</a></p>';
+        content.appendChild(embed);
+      }
+
+      // Wait for layout to settle before measuring
+      if (document.readyState === 'complete') {
+        embedPdf();
+      } else {
+        window.addEventListener('load', embedPdf);
+      }
+
+      // Recalculate on resize
+      let resizeTimer;
+      window.addEventListener('resize', function () {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function () {
+          const embed = content.querySelector('.cv-embed');
+          if (!embed) return;
+          const w = content.getBoundingClientRect().width;
+          const pageH = w * (297 / 210);
+          embed.style.height = (pageH * 3 + 40) + 'px';
+        }, 150);
+      });
+    })();
+
+    // Track download clicks
+    document.getElementById('cv-download').addEventListener('click', function () {
+      gtag('event', 'cv_download', {
+        event_category: 'engagement',
+        event_label: 'CV PDF download',
+      });
+    });
+  </script>
+
+</body>
+</html>
