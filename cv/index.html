@@ -207,7 +207,7 @@
         embed.type = 'application/pdf';
         embed.className = 'cv-embed';
         embed.style.height = totalH + 'px';
-        embed.innerHTML = '<p style="padding:40px;color:#FAF6EE">PDF cannot be displayed in this browser. <a href="emma-sprouster-cv.pdf" download style="color:inherit">Download CV instead.</a></p>';
+        embed.innerHTML = '<p style="padding:40px;color:#FAF6EE">PDF cannot be displayed in this browser. <a href="emma-sprouster-cv.pdf" download style="color:inherit" onclick="gtag(\'event\',\'cv_download\',{event_category:\'engagement\',event_label:\'CV PDF download (fallback)\'})">Download CV instead.</a></p>';
         content.appendChild(embed);
       }
 
