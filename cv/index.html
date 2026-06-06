@@ -122,17 +122,8 @@
     }
 
     .cv-page {
-      aspect-ratio: 210 / 297;
-      width: 100%;
-      background: #d9d9d9;
-    }
-
-    /* the embed fills the single page container */
-    .cv-embed {
       display: block;
       width: 100%;
-      height: 100%;
-      border: none;
     }
 
     /* ─── Responsive ───────────────────────────────────────── */
@@ -175,64 +166,14 @@
     </div>
   </header>
 
-  <!-- PDF pages -->
-  <main class="cv-content" id="cv-content">
-    <div class="cv-page" id="cv-page-1"></div>
-    <div class="cv-page"></div>
-    <div class="cv-page"></div>
+  <!-- CV pages as images -->
+  <main class="cv-content">
+    <img class="cv-page" src="images/EmmaSprouster_CV_P01.png" alt="CV page 1">
+    <img class="cv-page" src="images/EmmaSprouster_CV_P02.png" alt="CV page 2">
+    <img class="cv-page" src="images/EmmaSprouster_CV_P03.png" alt="CV page 3">
   </main>
 
   <script>
-    // Embed the PDF in the first page container, spanning all three pages
-    (function () {
-      const content = document.getElementById('cv-content');
-      const page1   = document.getElementById('cv-page-1');
-
-      function embedPdf() {
-        // Remove placeholder pages and replace with a single tall embed
-        const pages = content.querySelectorAll('.cv-page');
-        const totalGap = (pages.length - 1) * 20;
-
-        // Measure available width
-        const w = content.getBoundingClientRect().width;
-        const pageH = w * (297 / 210);
-        const totalH = pageH * pages.length + totalGap;
-
-        // Clear placeholders
-        pages.forEach(p => p.remove());
-
-        // Insert single embed
-        const embed = document.createElement('object');
-        embed.data = 'EmmaSprouster_CV.pdf';
-        embed.type = 'application/pdf';
-        embed.className = 'cv-embed';
-        embed.style.height = totalH + 'px';
-        embed.innerHTML = '<p style="padding:40px;color:#FAF6EE">PDF cannot be displayed in this browser. <a href="EmmaSprouster_CV.pdf" download style="color:inherit" onclick="gtag(\'event\',\'cv_download\',{event_category:\'engagement\',event_label:\'CV PDF download (fallback)\'})">Download CV instead.</a></p>';
-        content.appendChild(embed);
-      }
-
-      // Wait for layout to settle before measuring
-      if (document.readyState === 'complete') {
-        embedPdf();
-      } else {
-        window.addEventListener('load', embedPdf);
-      }
-
-      // Recalculate on resize
-      let resizeTimer;
-      window.addEventListener('resize', function () {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function () {
-          const embed = content.querySelector('.cv-embed');
-          if (!embed) return;
-          const w = content.getBoundingClientRect().width;
-          const pageH = w * (297 / 210);
-          embed.style.height = (pageH * 3 + 40) + 'px';
-        }, 150);
-      });
-    })();
-
-    // Track download clicks
     document.getElementById('cv-download').addEventListener('click', function () {
       gtag('event', 'cv_download', {
         event_category: 'engagement',
