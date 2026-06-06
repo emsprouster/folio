@@ -163,7 +163,7 @@
         Design Director<br>BNE, QLD, AUS
       </div>
       <nav class="header-links">
-        <a href="emma-sprouster-cv.pdf" download="Emma-Sprouster-CV.pdf" id="cv-download">
+        <a href="EmmaSprouster_CV.pdf" download="Emma-Sprouster-CV.pdf" id="cv-download">
           <span class="link-arrow" aria-hidden="true">↓</span>
           <span class="link-label">Download CV</span>
         </a>
@@ -203,11 +203,11 @@
 
         // Insert single embed
         const embed = document.createElement('object');
-        embed.data = 'emma-sprouster-cv.pdf';
+        embed.data = 'EmmaSprouster_CV.pdf';
         embed.type = 'application/pdf';
         embed.className = 'cv-embed';
         embed.style.height = totalH + 'px';
-        embed.innerHTML = '<p style="padding:40px;color:#FAF6EE">PDF cannot be displayed in this browser. <a href="emma-sprouster-cv.pdf" download style="color:inherit" onclick="gtag(\'event\',\'cv_download\',{event_category:\'engagement\',event_label:\'CV PDF download (fallback)\'})">Download CV instead.</a></p>';
+        embed.innerHTML = '<p style="padding:40px;color:#FAF6EE">PDF cannot be displayed in this browser. <a href="EmmaSprouster_CV.pdf" download style="color:inherit" onclick="gtag(\'event\',\'cv_download\',{event_category:\'engagement\',event_label:\'CV PDF download (fallback)\'})">Download CV instead.</a></p>';
         content.appendChild(embed);
       }
 
